@@ -1,0 +1,28 @@
+# Dossier de build CMake
+build/
+build-*/
+
+# Fichiers générés
+*.o
+*.a
+*.so
+*.exe
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+
+# VS Code (garder .vscode/ mais ignorer les fichiers perso)
+.vscode/settings.json
+.vscode/launch.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
