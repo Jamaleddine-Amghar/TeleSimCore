@@ -16,7 +16,6 @@ endif()
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 
-# IMPORTANT : doit être ici, pas dans un sous-dossier
 enable_testing()
 
 add_subdirectory(src)

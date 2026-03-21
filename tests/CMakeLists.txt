@@ -7,7 +7,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_executable(telesimcore_tests
-  unit/test_placeholder.cpp
+  unit/test_bpsk_modulator.cpp
 )
 
 target_link_libraries(telesimcore_tests
