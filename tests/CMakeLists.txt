@@ -9,6 +9,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(telesimcore_tests
   unit/test_bpsk_modulator.cpp
   unit/test_awgn_channel.cpp
+  unit/test_bpsk_demodulator.cpp
 )
 
 target_link_libraries(telesimcore_tests
