@@ -6,19 +6,26 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_executable(telesimcore_tests
+# ── Tests unitaires ──────────────────────────────────────────────────────────
+add_executable(unit_tests
   unit/test_bpsk_modulator.cpp
   unit/test_awgn_channel.cpp
   unit/test_bpsk_demodulator.cpp
 )
-
-target_link_libraries(telesimcore_tests
+target_link_libraries(unit_tests
   PRIVATE
     telesimcore_lib
     GTest::gtest_main
 )
+add_test(NAME unit_tests COMMAND unit_tests)
 
-add_test(
-  NAME telesimcore_tests
-  COMMAND telesimcore_tests
+# ── Tests d'intégration ──────────────────────────────────────────────────────
+add_executable(integration_tests
+  integration/test_bpsk_chain.cpp
 )
+target_link_libraries(integration_tests
+  PRIVATE
+    telesimcore_lib
+    GTest::gtest_main
+)
+add_test(NAME integration_tests COMMAND integration_tests)
