@@ -112,5 +112,5 @@ TEST_F(QpskModulatorTest, NameIsQPSK) { EXPECT_EQ(modulator.name(), "QPSK"); }
 // ── Test 12 : invalide argument ───────────────────────────────────────────────
 TEST_F(QpskModulatorTest, InvalidArgument) {
     EXPECT_THROW((void)modulator.modulate({1, 0, 2}),  // (void) = on ignore volontairement le retour
-                 std::invalid_argument);
+        std::invalid_argument);
 }

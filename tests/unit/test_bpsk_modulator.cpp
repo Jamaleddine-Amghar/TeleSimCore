@@ -63,5 +63,5 @@ TEST_F(BpskModulatorTest, NameIsBPSK) { EXPECT_EQ(modulator.name(), "BPSK"); }
 // ── Test 8 : invalide argument ───────────────────────────────────────────────
 TEST_F(BpskModulatorTest, InvalidArgument) {
     EXPECT_THROW((void)modulator.modulate({2}),  // (void) = on ignore volontairement le retour
-                 std::invalid_argument);
+        std::invalid_argument);
 }

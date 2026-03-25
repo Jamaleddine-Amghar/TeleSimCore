@@ -1,5 +1,0 @@
- pour formater mes codes avec .clang-format: 
-	find src tests \( -name "*.cpp" -o -name "*.hpp" \) -print0 | xargs -0 clang-format -i
-avant de voir si tout est bien avec la cmd: 
-find src tests -name "*.cpp" -o -name "*.hpp" | \
-          xargs clang-format --dry-run --Werror

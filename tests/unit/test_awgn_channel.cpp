@@ -34,7 +34,7 @@ TEST_F(AwgnChannelTest, VeryHighSnrSignalAlmostUnchanged) {
 
     // Avec SNR = 100dB, le bruit est negligeable
     EXPECT_NEAR(out[0].real(), 1.0,
-                0.01);  // Passes if |out[0].real() - 1.0| <= 0.01 => |result - expected| <= 0.01
+        0.01);  // Passes if |out[0].real() - 1.0| <= 0.01 => |result - expected| <= 0.01
     EXPECT_NEAR(out[1].real(), -1.0, 0.01);
 }
 
@@ -66,7 +66,7 @@ TEST_F(AwgnChannelTest, DifferentSeedsProduceDifferentOutput) {
     // Seeds differents -> bruit different
     // EXPECT_NE(out1[0].real(), out2[0].real()); // checks whether two values are not equal
     EXPECT_GT(std::abs(out1[0].real() - out2[0].real()),
-              1e-12);  // léger risque théorique (égalité par hasard)
+        1e-12);  // léger risque théorique (égalité par hasard)
 }
 
 // ── Test 6 : noisePower coherente avec SNR ───────────────────────────────────

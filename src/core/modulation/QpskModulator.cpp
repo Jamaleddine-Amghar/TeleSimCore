@@ -18,8 +18,8 @@ std::vector<Symbol> QpskModulator::modulate(const std::vector<int>& bits) const 
         auto b2 = (i + 1 < bits.size()) ? bits[i + 1] : 0;
 
         if ((b1 != 0 && b1 != 1) || (b2 != 0 && b2 != 1)) {
-            throw std::invalid_argument("QpskModulator::modulate() : bits invalide '" + std::to_string(b1) + " or " + std::to_string(b2) +
-                                        "' — valeurs acceptees : 0 ou 1");
+            throw std::invalid_argument(
+                "QpskModulator::modulate() : bits invalide '" + std::to_string(b1) + " or " + std::to_string(b2) + "' — valeurs acceptees : 0 ou 1");
         }
         // 00      →   (-1, -1)
         // 01      →   (-1, +1)
