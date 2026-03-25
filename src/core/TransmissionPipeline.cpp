@@ -22,8 +22,7 @@ SimulationResult TransmissionPipeline::run(int num_bits, unsigned int seed) cons
     auto bits = generateBits(num_bits, seed);
 
     // 2. Modulation
-    auto symbols =
-        modulator_->modulate(bits);  // (*modulator_).modulate(bits); modulator_ est un pointeur
+    auto symbols = modulator_->modulate(bits);  // (*modulator_).modulate(bits); modulator_ est un pointeur
 
     // 3. Canal
     auto noisy = channel_->apply(symbols);
@@ -32,8 +31,7 @@ SimulationResult TransmissionPipeline::run(int num_bits, unsigned int seed) cons
     auto result = demodulator_->demodulate(noisy);
 
     if (!result.has_value()) {
-        throw std::runtime_error(
-            "TransmissionPipeline::run() : demodulation echouee (symbole indecidable)");
+        throw std::runtime_error("TransmissionPipeline::run() : demodulation echouee (symbole indecidable)");
     }
 
     // 5. Calcul BER

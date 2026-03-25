@@ -37,8 +37,7 @@ public:
      * @return        Signal bruite
      */
     [[nodiscard]]
-    std::vector<std::complex<double>> apply(
-        const std::vector<std::complex<double>>& signal) const override;
+    std::vector<std::complex<double>> apply(const std::vector<std::complex<double>>& signal) const override;
 
     [[nodiscard]]
     std::string name() const override {
@@ -67,10 +66,9 @@ private:
     double snr_db_;
     double sigma_;  // Ecart-type du bruit
 
-    mutable std::mt19937 rng_;  // Generateur Mersenne Twister
-    mutable std::normal_distribution<double>
-        dist_;  // Distribution gaussienne
-                // mutable => Modifying Data Members in const Methods
+    mutable std::mt19937 rng_;                       // Generateur Mersenne Twister
+    mutable std::normal_distribution<double> dist_;  // Distribution gaussienne
+                                                     // mutable => Modifying Data Members in const Methods
 };
 
 }  // namespace telecom

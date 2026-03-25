@@ -18,8 +18,7 @@ public:
      * Demodule des symboles complexes en bits
      */
     [[nodiscard]]
-    virtual std::optional<std::vector<int>> demodulate(
-        const std::vector<std::complex<double>>& symbols) const = 0;
+    virtual std::optional<std::vector<int>> demodulate(const std::vector<std::complex<double>>& symbols) const = 0;
 
     [[nodiscard]]
     virtual int bitsPerSymbol() const noexcept = 0;

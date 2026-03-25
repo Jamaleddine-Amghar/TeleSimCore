@@ -73,8 +73,7 @@ TEST_F(QpskDemodulatorTest, ZeroImagReturnsNullopt) {
 // ── Test 8 : sequence connue -> bits corrects ─────────────────────────────────
 TEST_F(QpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
     // (+1,-1) (-1,-1) (+1,+1) (-1,+1)  ->  1 0 0 0 1 1 0 1
-    std::vector<std::complex<double>> symbols = {
-        {+1.0, -1.0}, {-1.0, -1.0}, {+1.0, +1.0}, {-1.0, +1.0}};
+    std::vector<std::complex<double>> symbols = {{+1.0, -1.0}, {-1.0, -1.0}, {+1.0, +1.0}, {-1.0, +1.0}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());

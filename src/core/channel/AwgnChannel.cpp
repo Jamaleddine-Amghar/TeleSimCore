@@ -18,8 +18,7 @@ AwgnChannel::AwgnChannel(double snr_db, unsigned int seed)
     sigma_ = std::sqrt(1.0 / (2.0 * snr_linear));
 }
 
-std::vector<std::complex<double>> AwgnChannel::apply(
-    const std::vector<std::complex<double>>& signal) const {
+std::vector<std::complex<double>> AwgnChannel::apply(const std::vector<std::complex<double>>& signal) const {
     if (signal.empty()) {
         return {};
     }

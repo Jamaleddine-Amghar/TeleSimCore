@@ -18,8 +18,7 @@ public:
      * Applique les effets du canal sur le signal emis
      */
     [[nodiscard]]
-    virtual std::vector<std::complex<double>> apply(
-        const std::vector<std::complex<double>>& signal) const = 0;
+    virtual std::vector<std::complex<double>> apply(const std::vector<std::complex<double>>& signal) const = 0;
 
     /**
      * Nom du canal

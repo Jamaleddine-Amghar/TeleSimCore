@@ -44,8 +44,7 @@ TEST_F(BpskDemodulatorTest, ZeroRealReturnsNullopt) {
 // ── Test 5 : sequence connue -> bits corrects ─────────────────────────────────
 TEST_F(BpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
     // +1 -1 +1 -1  ->  1 0 1 0
-    std::vector<std::complex<double>> symbols = {
-        {+1.0, 0.0}, {-1.0, 0.0}, {+1.0, 0.0}, {-1.0, 0.0}};
+    std::vector<std::complex<double>> symbols = {{+1.0, 0.0}, {-1.0, 0.0}, {+1.0, 0.0}, {-1.0, 0.0}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());

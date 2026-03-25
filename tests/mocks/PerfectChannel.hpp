@@ -12,8 +12,7 @@ namespace telecom {
 class PerfectChannel : public IChannel {
 public:
     [[nodiscard]]
-    std::vector<std::complex<double>> apply(
-        const std::vector<std::complex<double>>& signal) const override {
+    std::vector<std::complex<double>> apply(const std::vector<std::complex<double>>& signal) const override {
         return signal;  // Signal inchange
     }
 

@@ -38,15 +38,14 @@ int main() {
         std::cout << "================================================\n\n";
 
         // Plage de SNR a simuler
-        const std::vector<double> snr_range = {-50.0, -20.0, -15.0, -2.0, 0.0, 2.0,
-                                               4.0,   6.0,   8.0,   10.0, 15.0};
+        const std::vector<double> snr_range = {-50.0, -20.0, -15.0, -2.0, 0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 15.0};
         const int num_bits = 500000;
 
         // En-tete du tableau
         constexpr int W1 = 12;
         constexpr int W2 = 18;
-        std::cout << std::left << std::setw(W1) << "BNR (dB)" << std::setw(W2) << "BER theorique"
-                  << std::setw(W2) << "SER theorique" << std::setw(W1) << "Bits errones"
+        std::cout << std::left << std::setw(W1) << "BNR (dB)" << std::setw(W2) << "BER theorique" << std::setw(W2) << "SER theorique" << std::setw(W1)
+                  << "Bits errones"
                   << "\n";
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";
 
@@ -68,9 +67,8 @@ int main() {
             std::cout << std::left << std::setw(W1) << std::fixed << std::setprecision(1) << snr_db
                       << std::setw(W2)
                       // << std::scientific
-                      << std::setprecision(8) << theoreticalBer(snr_db) << std::setw(W2)
-                      << theoreticalSer(snr_db, "BPSK") << std::setw(W1) << result.error_bits
-                      << "\n";
+                      << std::setprecision(8) << theoreticalBer(snr_db) << std::setw(W2) << theoreticalSer(snr_db, "BPSK") << std::setw(W1)
+                      << result.error_bits << "\n";
         }
 
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";
@@ -82,8 +80,8 @@ int main() {
         std::cout << "    TeleSimCore : Simulation BER QPSK + AWGN    \n";
         std::cout << "================================================\n\n";
 
-        std::cout << std::left << std::setw(W1) << "SNR (dB)" << std::setw(W2) << "BER theorique"
-                  << std::setw(W2) << "SER theorique" << std::setw(W1) << "Bits errones"
+        std::cout << std::left << std::setw(W1) << "SNR (dB)" << std::setw(W2) << "BER theorique" << std::setw(W2) << "SER theorique" << std::setw(W1)
+                  << "Bits errones"
                   << "\n";
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";
 
@@ -105,9 +103,8 @@ int main() {
             std::cout << std::left << std::setw(W1) << std::fixed << std::setprecision(1) << snr_db
                       << std::setw(W2)
                       // << std::scientific
-                      << std::setprecision(8) << theoreticalBer(snr_db) << std::setw(W2)
-                      << theoreticalSer(snr_db, "QPSK") << std::setw(W1) << result.error_bits
-                      << "\n";
+                      << std::setprecision(8) << theoreticalBer(snr_db) << std::setw(W2) << theoreticalSer(snr_db, "QPSK") << std::setw(W1)
+                      << result.error_bits << "\n";
         }
 
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";

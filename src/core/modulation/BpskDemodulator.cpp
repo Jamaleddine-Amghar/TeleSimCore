@@ -2,8 +2,7 @@
 
 namespace telecom {
 
-std::optional<std::vector<int>> BpskDemodulator::demodulate(
-    const std::vector<std::complex<double>>& symbols) const {
+std::optional<std::vector<int>> BpskDemodulator::demodulate(const std::vector<std::complex<double>>& symbols) const {
     if (symbols.empty()) {
         return std::vector<int>{};  // Entree vide -> sortie vide (pas nullopt)
     }

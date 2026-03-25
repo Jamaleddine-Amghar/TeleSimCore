@@ -14,8 +14,7 @@ std::vector<Symbol> BpskModulator::modulate(const std::vector<int>& bits) const 
     for (const int bit : bits) {
         // Valider que le bit est bien 0 ou 1
         if (bit != 0 && bit != 1) {
-            throw std::invalid_argument("BpskModulator::modulate() : bit invalide '" +
-                                        std::to_string(bit) + "' — valeurs acceptees : 0 ou 1");
+            throw std::invalid_argument("BpskModulator::modulate() : bit invalide '" + std::to_string(bit) + "' — valeurs acceptees : 0 ou 1");
         }
         // bit 0 -> -1.0 + 0.0j
         // bit 1 -> +1.0 + 0.0j
