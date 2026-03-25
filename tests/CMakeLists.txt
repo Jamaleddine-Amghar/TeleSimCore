@@ -13,11 +13,16 @@ add_executable(unit_tests
   unit/test_bpsk_demodulator.cpp
   unit/test_qpsk_modulator.cpp
   unit/test_qpsk_demodulator.cpp
+  unit/test_transmission_pipeline.cpp
 )
 target_link_libraries(unit_tests
   PRIVATE
     telesimcore_lib
     GTest::gtest_main
+)
+# Dossier tests/ accessible pour #include "mocks/PerfectChannel.hpp"
+target_include_directories(unit_tests
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 )
 add_test(NAME unit_tests COMMAND unit_tests)
 

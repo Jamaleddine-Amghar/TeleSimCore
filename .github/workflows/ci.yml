@@ -17,11 +17,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake ninja-build g++
-          
-      - name: Clean build directory
-        run: rm -rf build
-        
+          sudo apt-get install -y cmake ninja-build g++ cppcheck clang-format
+
       - name: Configure CMake
         run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
 
@@ -33,3 +30,17 @@ jobs:
 
       - name: Run integration tests
         run: cd build && ctest -R integration_tests --output-on-failure
+      
+      - name: Static analysis (cppcheck)
+        run: |
+          cppcheck --enable=all \
+                   --suppress=missingIncludeSystem \
+                   --error-exitcode=1 \
+                   --std=c++17 \
+                   -I src/ \
+                   src/
+
+      - name: Check formatting (clang-format)
+        run: |
+          find src tests -name "*.cpp" -o -name "*.hpp" | \
+          xargs clang-format --dry-run --Werror
