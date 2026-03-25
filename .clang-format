@@ -4,25 +4,20 @@ IndentWidth: 4
 ColumnLimit: 150
 AccessModifierOffset: -4
 PointerAlignment: Left
-
-# === Corrections pour tes erreurs actuelles ===
-
-# 1. Pour les lignes avec << "Bits errones" (chained operators)
-# Google style aligne parfois les << sur la colonne précédente → on force un indent simple
-AlignAfterOpenBracket: DontAlign
-ContinuationIndentWidth: 4
-BreakBeforeBinaryOperators: None     # ou All si tu préfères le break avant l'opérateur
-
-# 2. Pour les signatures dans les .hpp :
-# std::vector<std::complex<double>>  →  &  (espace avant le &)
-ReferenceAlignment: Pointer          # ou Left (les deux marchent souvent)
+ReferenceAlignment: Pointer
 DerivePointerAlignment: false
 
-# Option très utile en C++ moderne (évite les problèmes avec >>)
-Standard: Cpp11                      # ou Cpp17 / Latest selon ta version de C++
-
-# Options supplémentaires recommandées (propre + cohérent)
+# Pour éviter l'erreur sur les templates >> et l'espace avant &
 SpacesInAngles: Never
+
+# Pour les lignes avec << "Bits errones"
+AlignAfterOpenBracket: DontAlign
+ContinuationIndentWidth: 4
+BreakBeforeBinaryOperators: None
+AlignOperands: DontAlign
+
+# Options de propreté
 SpaceBeforeParens: ControlStatements
-AlignConsecutiveAssignments: None
-AlignConsecutiveDeclarations: None
+
+# Standard sans risque d'erreur (Latest = le plus récent supporté)
+Standard: Latest
