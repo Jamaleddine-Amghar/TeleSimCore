@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "core/modulation/BpskDemodulator.hpp"
 
 using namespace telecom;
@@ -44,8 +45,7 @@ TEST_F(BpskDemodulatorTest, ZeroRealReturnsNullopt) {
 TEST_F(BpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
     // +1 -1 +1 -1  ->  1 0 1 0
     std::vector<std::complex<double>> symbols = {
-        {+1.0, 0.0}, {-1.0, 0.0}, {+1.0, 0.0}, {-1.0, 0.0}
-    };
+        {+1.0, 0.0}, {-1.0, 0.0}, {+1.0, 0.0}, {-1.0, 0.0}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());
@@ -59,23 +59,17 @@ TEST_F(BpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
 // ── Test 6 : symboles bruites mais decidables ─────────────────────────────────
 TEST_F(BpskDemodulatorTest, NoisyButDecidableSymbols) {
     // Symboles legerement bruites mais toujours du bon cote
-    std::vector<std::complex<double>> symbols = {
-        {+0.7, 0.3}, {-0.8, -0.1}, {+0.5, 0.9}
-    };
+    std::vector<std::complex<double>> symbols = {{+0.7, 0.3}, {-0.8, -0.1}, {+0.5, 0.9}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());
-    EXPECT_EQ((*result)[0], 1);   // +0.7 > 0 -> 1
-    EXPECT_EQ((*result)[1], 0);   // -0.8 < 0 -> 0
-    EXPECT_EQ((*result)[2], 1);   // +0.5 > 0 -> 1
+    EXPECT_EQ((*result)[0], 1);  // +0.7 > 0 -> 1
+    EXPECT_EQ((*result)[1], 0);  // -0.8 < 0 -> 0
+    EXPECT_EQ((*result)[2], 1);  // +0.5 > 0 -> 1
 }
 
 // ── Test 7 : bitsPerSymbol vaut 1 ────────────────────────────────────────────
-TEST_F(BpskDemodulatorTest, BitsPerSymbolIsOne) {
-    EXPECT_EQ(demodulator.bitsPerSymbol(), 1);
-}
+TEST_F(BpskDemodulatorTest, BitsPerSymbolIsOne) { EXPECT_EQ(demodulator.bitsPerSymbol(), 1); }
 
 // ── Test 8 : nom du demodulateur ─────────────────────────────────────────────
-TEST_F(BpskDemodulatorTest, NameIsBPSK) {
-    EXPECT_EQ(demodulator.name(), "BPSK");
-}
+TEST_F(BpskDemodulatorTest, NameIsBPSK) { EXPECT_EQ(demodulator.name(), "BPSK"); }

@@ -2,10 +2,8 @@
 
 namespace telecom {
 
-std::optional<std::vector<int>>
-QpskDemodulator::demodulate(
-    const std::vector<std::complex<double>>& symbols) const
-{
+std::optional<std::vector<int>> QpskDemodulator::demodulate(
+    const std::vector<std::complex<double>>& symbols) const {
     if (symbols.empty()) {
         return std::vector<int>{};  // Entree vide -> sortie vide (pas nullopt)
     }
@@ -17,11 +15,12 @@ QpskDemodulator::demodulate(
         const double real = symbol.real();
         const double imag = symbol.imag();
 
-        int b1; int b2;
+        int b1;
+        int b2;
 
         if (real > 0.0) {
             b1 = 1;
-        } else if (real < 0.0){
+        } else if (real < 0.0) {
             b1 = 0;
         } else {
             return std::nullopt;
@@ -29,7 +28,7 @@ QpskDemodulator::demodulate(
 
         if (imag > 0.0) {
             b2 = 1;
-        } else if (imag < 0.0){
+        } else if (imag < 0.0) {
             b2 = 0;
         } else {
             return std::nullopt;
@@ -41,4 +40,4 @@ QpskDemodulator::demodulate(
     return bits;
 }
 
-} // namespace telecom
+}  // namespace telecom

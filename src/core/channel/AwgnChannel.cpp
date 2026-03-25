@@ -3,9 +3,9 @@
 namespace telecom {
 
 AwgnChannel::AwgnChannel(double snr_db, unsigned int seed)
-    : snr_db_(snr_db)
-    , rng_(seed)
-    , dist_(0.0, 1.0)   // Gaussienne centree, ecart-type = 1
+    : snr_db_(snr_db),
+      rng_(seed),
+      dist_(0.0, 1.0)  // Gaussienne centree, ecart-type = 1
 {
     // Conversion SNR dB -> lineaire
     // snr_linear = 10^(snr_db / 10)
@@ -18,9 +18,8 @@ AwgnChannel::AwgnChannel(double snr_db, unsigned int seed)
     sigma_ = std::sqrt(1.0 / (2.0 * snr_linear));
 }
 
-std::vector<std::complex<double>>
-AwgnChannel::apply(const std::vector<std::complex<double>>& signal) const
-{
+std::vector<std::complex<double>> AwgnChannel::apply(
+    const std::vector<std::complex<double>>& signal) const {
     if (signal.empty()) {
         return {};
     }
@@ -33,13 +32,10 @@ AwgnChannel::apply(const std::vector<std::complex<double>>& signal) const
         const double noise_i = sigma_ * dist_(rng_);
         const double noise_q = sigma_ * dist_(rng_);
 
-        noisy.emplace_back(
-            symbol.real() + noise_i,
-            symbol.imag() + noise_q
-        );
+        noisy.emplace_back(symbol.real() + noise_i, symbol.imag() + noise_q);
     }
 
     return noisy;
 }
 
-} // namespace telecom
+}  // namespace telecom

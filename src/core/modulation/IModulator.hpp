@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
 #include <complex>
 #include <string>
+#include <vector>
 
 namespace telecom {
 
@@ -19,8 +19,7 @@ public:
      * Module une sequence de bits en symboles complexes
      */
     [[nodiscard]]
-    virtual std::vector<std::complex<double>>
-    modulate(const std::vector<int>& bits) const = 0;
+    virtual std::vector<std::complex<double>> modulate(const std::vector<int>& bits) const = 0;
 
     /**
      * Nombre de bits par symbole
@@ -35,4 +34,4 @@ public:
     virtual std::string name() const = 0;
 };
 
-} // namespace telecom
+}  // namespace telecom

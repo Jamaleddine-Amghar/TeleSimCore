@@ -1,15 +1,17 @@
 #include <gtest/gtest.h>
-#include "core/channel/AwgnChannel.hpp"
+
 #include <cmath>
 #include <numeric>
+
+#include "core/channel/AwgnChannel.hpp"
 
 using namespace telecom;
 
 class AwgnChannelTest : public ::testing::Test {
 protected:
     // Seed fixe -> tests 100% reproductibles
-    AwgnChannel channel_10db  { 10.0, 42 };
-    AwgnChannel channel_100db { 100.0, 42 }; // SNR tres eleve ~ canal parfait
+    AwgnChannel channel_10db{10.0, 42};
+    AwgnChannel channel_100db{100.0, 42};  // SNR tres eleve ~ canal parfait
 };
 
 // ── Test 1 : entree vide -> sortie vide ──────────────────────────────────────
@@ -20,7 +22,7 @@ TEST_F(AwgnChannelTest, EmptyInputReturnsEmptyOutput) {
 
 // ── Test 2 : taille entree = taille sortie ───────────────────────────────────
 TEST_F(AwgnChannelTest, OutputSizeMatchesInputSize) {
-    std::vector<std::complex<double>> signal = {{1,0},{-1,0},{1,0}};
+    std::vector<std::complex<double>> signal = {{1, 0}, {-1, 0}, {1, 0}};
     auto out = channel_10db.apply(signal);
     EXPECT_EQ(out.size(), signal.size());
 }
@@ -31,7 +33,8 @@ TEST_F(AwgnChannelTest, VeryHighSnrSignalAlmostUnchanged) {
     auto out = channel_100db.apply(signal);
 
     // Avec SNR = 100dB, le bruit est negligeable
-    EXPECT_NEAR(out[0].real(), 1.0, 0.01); // Passes if |out[0].real() - 1.0| <= 0.01 => |result - expected| <= 0.01
+    EXPECT_NEAR(out[0].real(), 1.0,
+                0.01);  // Passes if |out[0].real() - 1.0| <= 0.01 => |result - expected| <= 0.01
     EXPECT_NEAR(out[1].real(), -1.0, 0.01);
 }
 
@@ -62,7 +65,8 @@ TEST_F(AwgnChannelTest, DifferentSeedsProduceDifferentOutput) {
 
     // Seeds differents -> bruit different
     // EXPECT_NE(out1[0].real(), out2[0].real()); // checks whether two values are not equal
-	EXPECT_GT(std::abs(out1[0].real() - out2[0].real()), 1e-12); // léger risque théorique (égalité par hasard)
+    EXPECT_GT(std::abs(out1[0].real() - out2[0].real()),
+              1e-12);  // léger risque théorique (égalité par hasard)
 }
 
 // ── Test 6 : noisePower coherente avec SNR ───────────────────────────────────

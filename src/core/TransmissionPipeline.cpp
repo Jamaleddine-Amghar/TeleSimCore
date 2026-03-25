@@ -2,31 +2,28 @@
 
 namespace telecom {
 
-std::vector<int>
-TransmissionPipeline::generateBits(int n, unsigned int seed) const
-{
+std::vector<int> TransmissionPipeline::generateBits(int n, unsigned int seed) {
     std::mt19937 rng(seed);
     std::uniform_int_distribution<int> dist(0, 1);
     std::vector<int> bits(n);
-    for (auto& b : bits) b = dist(rng);
+    // for (auto& b : bits) b = dist(rng);
+    std::generate(bits.begin(), bits.end(), [&]() { return dist(rng); });  // suggestion de cppcheck
     return bits;
 }
 
-SimulationResult
-TransmissionPipeline::run(int num_bits, unsigned int seed) const
-{
+SimulationResult TransmissionPipeline::run(int num_bits, unsigned int seed) const {
     if (!isReady()) {
         throw std::runtime_error(
             "TransmissionPipeline::run() : pipeline incomplet. "
-            "Appeler setModulator(), setChannel(), setDemodulator() avant run()."
-        );
+            "Appeler setModulator(), setChannel(), setDemodulator() avant run().");
     }
 
     // 1. Generer les bits aleatoires
     auto bits = generateBits(num_bits, seed);
 
     // 2. Modulation
-    auto symbols = modulator_->modulate(bits); // (*modulator_).modulate(bits); modulator_ est un pointeur
+    auto symbols =
+        modulator_->modulate(bits);  // (*modulator_).modulate(bits); modulator_ est un pointeur
 
     // 3. Canal
     auto noisy = channel_->apply(symbols);
@@ -36,8 +33,7 @@ TransmissionPipeline::run(int num_bits, unsigned int seed) const
 
     if (!result.has_value()) {
         throw std::runtime_error(
-            "TransmissionPipeline::run() : demodulation echouee (symbole indecidable)"
-        );
+            "TransmissionPipeline::run() : demodulation echouee (symbole indecidable)");
     }
 
     // 5. Calcul BER
@@ -48,7 +44,7 @@ TransmissionPipeline::run(int num_bits, unsigned int seed) const
 
     const double ber = static_cast<double>(errors) / static_cast<double>(num_bits);
 
-    SimulationResult res; // c++17
+    SimulationResult res;  // c++17
     res.ber = ber;
     res.total_bits = num_bits;
     res.error_bits = errors;
@@ -67,4 +63,4 @@ TransmissionPipeline::run(int num_bits, unsigned int seed) const
     return res;
 }
 
-} // namespace telecom
+}  // namespace telecom

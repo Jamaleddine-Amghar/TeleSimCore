@@ -1,12 +1,14 @@
 #pragma once
 
-#include "core/modulation/IModulator.hpp"
-#include "core/modulation/IDemodulator.hpp"
-#include "core/channel/IChannel.hpp"
-#include <vector>
+#include <algorithm>
 #include <memory>
 #include <random>
 #include <stdexcept>
+#include <vector>
+
+#include "core/channel/IChannel.hpp"
+#include "core/modulation/IDemodulator.hpp"
+#include "core/modulation/IModulator.hpp"
 
 namespace telecom {
 
@@ -14,10 +16,10 @@ namespace telecom {
  * Resultat d'une simulation
  */
 struct SimulationResult {
-    double ber;           // Bit Error Rate mesure
-    int    total_bits;    // Nombre total de bits transmis
-    int    error_bits;    // Nombre de bits errones
-    double snr_db;        // SNR utilise
+    double ber;      // Bit Error Rate mesure
+    int total_bits;  // Nombre total de bits transmis
+    int error_bits;  // Nombre de bits errones
+    double snr_db;   // SNR utilise
     std::string modulator_name;
     std::string channel_name;
 };
@@ -38,8 +40,8 @@ public:
     TransmissionPipeline() = default;
 
     // Setters — injection des blocs via interfaces
-    void setModulator  (std::unique_ptr<IModulator>   mod) { modulator_   = std::move(mod); }
-    void setChannel    (std::unique_ptr<IChannel>     ch)  { channel_     = std::move(ch);  }
+    void setModulator(std::unique_ptr<IModulator> mod) { modulator_ = std::move(mod); }
+    void setChannel(std::unique_ptr<IChannel> ch) { channel_ = std::move(ch); }
     void setDemodulator(std::unique_ptr<IDemodulator> dem) { demodulator_ = std::move(dem); }
 
     /**
@@ -58,13 +60,13 @@ public:
     }
 
 private:
-    std::unique_ptr<IModulator>   modulator_;
-    std::unique_ptr<IChannel>     channel_;
+    std::unique_ptr<IModulator> modulator_;
+    std::unique_ptr<IChannel> channel_;
     std::unique_ptr<IDemodulator> demodulator_;
 
     // Genere des bits aleatoires
     [[nodiscard]]
-    std::vector<int> generateBits(int n, unsigned int seed) const;
+    static std::vector<int> generateBits(int n, unsigned int seed);
 };
 
-} // namespace telecom
+}  // namespace telecom

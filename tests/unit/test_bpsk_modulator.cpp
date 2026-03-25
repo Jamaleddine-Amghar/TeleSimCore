@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "core/modulation/BpskModulator.hpp"
 
 using namespace telecom;
@@ -13,9 +14,9 @@ protected:
 TEST_F(BpskModulatorTest, ZeroBitMapsToMinusOne) {
     auto symbols = modulator.modulate({0});
 
-    ASSERT_EQ(symbols.size(), 1u);          // Un bit -> un symbole
+    ASSERT_EQ(symbols.size(), 1u);  // Un bit -> un symbole
     EXPECT_DOUBLE_EQ(symbols[0].real(), -1.0);
-    EXPECT_DOUBLE_EQ(symbols[0].imag(),  0.0);
+    EXPECT_DOUBLE_EQ(symbols[0].imag(), 0.0);
 }
 
 // ── Test 2 : bit 1 donne le symbole (+1, 0) ──────────────────────────────────
@@ -24,7 +25,7 @@ TEST_F(BpskModulatorTest, OneBitMapsToPositiveOne) {
 
     ASSERT_EQ(symbols.size(), 1u);
     EXPECT_DOUBLE_EQ(symbols[0].real(), +1.0);
-    EXPECT_DOUBLE_EQ(symbols[0].imag(),  0.0);
+    EXPECT_DOUBLE_EQ(symbols[0].imag(), 0.0);
 }
 
 // ── Test 3 : entree vide -> sortie vide ──────────────────────────────────────
@@ -54,18 +55,13 @@ TEST_F(BpskModulatorTest, KnownSequenceProducesCorrectSymbols) {
 }
 
 // ── Test 6 : bitsPerSymbol vaut toujours 1 ───────────────────────────────────
-TEST_F(BpskModulatorTest, BitsPerSymbolIsOne) {
-    EXPECT_EQ(modulator.bitsPerSymbol(), 1);
-}
+TEST_F(BpskModulatorTest, BitsPerSymbolIsOne) { EXPECT_EQ(modulator.bitsPerSymbol(), 1); }
 
 // ── Test 7 : nom du modulateur ───────────────────────────────────────────────
-TEST_F(BpskModulatorTest, NameIsBPSK) {
-    EXPECT_EQ(modulator.name(), "BPSK");
-}
+TEST_F(BpskModulatorTest, NameIsBPSK) { EXPECT_EQ(modulator.name(), "BPSK"); }
 
 // ── Test 8 : invalide argument ───────────────────────────────────────────────
 TEST_F(BpskModulatorTest, InvalidArgument) {
-    EXPECT_THROW(
-	(void) modulator.modulate({2}), // (void) = on ignore volontairement le retour
-	std::invalid_argument);
+    EXPECT_THROW((void)modulator.modulate({2}),  // (void) = on ignore volontairement le retour
+                 std::invalid_argument);
 }

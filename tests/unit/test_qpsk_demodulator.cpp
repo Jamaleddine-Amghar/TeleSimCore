@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "core/modulation/QpskDemodulator.hpp"
 
 using namespace telecom;
@@ -15,7 +16,7 @@ TEST_F(QpskDemodulatorTest, PlusOnePlusOneSymbolGivesBitsOneOne) {
     ASSERT_TRUE(result.has_value());
     ASSERT_EQ(result->size(), 2u);
     EXPECT_EQ((*result)[0], 1);
-	EXPECT_EQ((*result)[1], 1);
+    EXPECT_EQ((*result)[1], 1);
 }
 
 // ── Test 2 : symbole (+1,-1) -> bits 1 0 ────────────────────────────────────────
@@ -25,7 +26,7 @@ TEST_F(QpskDemodulatorTest, PlusOneMinusOneSymbolGivesBitsOneZero) {
     ASSERT_TRUE(result.has_value());
     ASSERT_EQ(result->size(), 2u);
     EXPECT_EQ((*result)[0], 1);
-	EXPECT_EQ((*result)[1], 0);
+    EXPECT_EQ((*result)[1], 0);
 }
 
 // ── Test 3 : symbole (-1,+1) -> bits 0 1 ────────────────────────────────────────
@@ -35,7 +36,7 @@ TEST_F(QpskDemodulatorTest, MinusOnePlusOneSymbolGivesBitsZeroOne) {
     ASSERT_TRUE(result.has_value());
     ASSERT_EQ(result->size(), 2u);
     EXPECT_EQ((*result)[0], 0);
-	EXPECT_EQ((*result)[1], 1);
+    EXPECT_EQ((*result)[1], 1);
 }
 
 // ── Test 4 : symbole (-1,-1) -> bits 0 0 ────────────────────────────────────────
@@ -45,7 +46,7 @@ TEST_F(QpskDemodulatorTest, PlusOnePlusOneSymbolGivesBitsZeroZero) {
     ASSERT_TRUE(result.has_value());
     ASSERT_EQ(result->size(), 2u);
     EXPECT_EQ((*result)[0], 0);
-	EXPECT_EQ((*result)[1], 0);
+    EXPECT_EQ((*result)[1], 0);
 }
 
 // ── Test 5 : entree vide -> sortie vide (pas nullopt) ────────────────────────
@@ -62,7 +63,8 @@ TEST_F(QpskDemodulatorTest, ZeroRealReturnsNullopt) {
     EXPECT_FALSE(result.has_value());
 }
 
-// ── Test 7 : partie imaginaire du symbole exactement zero -> nullopt ───────────────────────────────
+// ── Test 7 : partie imaginaire du symbole exactement zero -> nullopt
+// ───────────────────────────────
 TEST_F(QpskDemodulatorTest, ZeroImagReturnsNullopt) {
     auto result = demodulator.demodulate({{0.4, 0.0}});
     EXPECT_FALSE(result.has_value());
@@ -72,8 +74,7 @@ TEST_F(QpskDemodulatorTest, ZeroImagReturnsNullopt) {
 TEST_F(QpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
     // (+1,-1) (-1,-1) (+1,+1) (-1,+1)  ->  1 0 0 0 1 1 0 1
     std::vector<std::complex<double>> symbols = {
-        {+1.0, -1.0}, {-1.0, -1.0}, {+1.0, +1.0}, {-1.0, +1.0}
-    };
+        {+1.0, -1.0}, {-1.0, -1.0}, {+1.0, +1.0}, {-1.0, +1.0}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());
@@ -82,7 +83,7 @@ TEST_F(QpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
     EXPECT_EQ((*result)[1], 0);
     EXPECT_EQ((*result)[2], 0);
     EXPECT_EQ((*result)[3], 0);
-	EXPECT_EQ((*result)[4], 1);
+    EXPECT_EQ((*result)[4], 1);
     EXPECT_EQ((*result)[5], 1);
     EXPECT_EQ((*result)[6], 0);
     EXPECT_EQ((*result)[7], 1);
@@ -91,27 +92,21 @@ TEST_F(QpskDemodulatorTest, KnownSequenceProducesCorrectBits) {
 // ── Test 9 : symboles bruites mais decidables ─────────────────────────────────
 TEST_F(QpskDemodulatorTest, NoisyButDecidableSymbols) {
     // Symboles legerement bruites mais toujours du bon cote
-    std::vector<std::complex<double>> symbols = {
-        {+0.7, +0.3}, {-0.8, -0.1}, {-0.5, +0.9}
-    };
+    std::vector<std::complex<double>> symbols = {{+0.7, +0.3}, {-0.8, -0.1}, {-0.5, +0.9}};
     auto result = demodulator.demodulate(symbols);
 
     ASSERT_TRUE(result.has_value());
-	ASSERT_EQ(result->size(), 6u);
-    EXPECT_EQ((*result)[0], 1);   
-    EXPECT_EQ((*result)[1], 1);   
-    EXPECT_EQ((*result)[2], 0);   
-	EXPECT_EQ((*result)[3], 0);   
-    EXPECT_EQ((*result)[4], 0);   
-    EXPECT_EQ((*result)[5], 1);   
+    ASSERT_EQ(result->size(), 6u);
+    EXPECT_EQ((*result)[0], 1);
+    EXPECT_EQ((*result)[1], 1);
+    EXPECT_EQ((*result)[2], 0);
+    EXPECT_EQ((*result)[3], 0);
+    EXPECT_EQ((*result)[4], 0);
+    EXPECT_EQ((*result)[5], 1);
 }
 
 // ── Test 10 : bitsPerSymbol vaut 2 ────────────────────────────────────────────
-TEST_F(QpskDemodulatorTest, BitsPerSymbolIsTwo) {
-    EXPECT_EQ(demodulator.bitsPerSymbol(), 2);
-}
+TEST_F(QpskDemodulatorTest, BitsPerSymbolIsTwo) { EXPECT_EQ(demodulator.bitsPerSymbol(), 2); }
 
 // ── Test 8 : nom du demodulateur ─────────────────────────────────────────────
-TEST_F(QpskDemodulatorTest, NameIsQPSK) {
-    EXPECT_EQ(demodulator.name(), "QPSK-DEMOD");
-}
+TEST_F(QpskDemodulatorTest, NameIsQPSK) { EXPECT_EQ(demodulator.name(), "QPSK-DEMOD"); }
