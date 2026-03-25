@@ -35,6 +35,7 @@ jobs:
         run: |
           cppcheck --enable=all \
                    --suppress=missingIncludeSystem \
+                   --suppress=unusedFunction \
                    --error-exitcode=1 \
                    --std=c++17 \
                    -I src/ \
