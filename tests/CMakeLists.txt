@@ -23,9 +23,9 @@ add_test(NAME unit_tests COMMAND unit_tests)
 
 # ── Tests d'intégration ──────────────────────────────────────────────────────
 add_executable(integration_tests
-  #integration/test_qpsk_chain.cpp
-  #integration/test_bpsk_chain.cpp
-   integration/test_bpsk_qpsk_chain.cpp
+  integration/test_qpsk_chain.cpp
+  integration/test_bpsk_chain.cpp
+   #integration/test_bpsk_qpsk_chain.cpp
 )
 target_link_libraries(integration_tests
   PRIVATE
