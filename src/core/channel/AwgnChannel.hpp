@@ -1,7 +1,8 @@
 #pragma once
 
-#include <vector>
-#include <complex>
+// #include <vector>
+// #include <complex>
+#include "core/channel/IChannel.hpp"
 #include <random>
 #include <cmath>
 
@@ -18,7 +19,7 @@ namespace telecom {
  *   n = bruit gaussien de variance sigma^2
  *   y = signal recu
  */
-class AwgnChannel {
+class AwgnChannel : public IChannel {
 public:
     /**
      * @param snr_db  Rapport signal/bruit en dB
@@ -36,8 +37,11 @@ public:
      */
     [[nodiscard]]
     std::vector<std::complex<double>>
-    apply(const std::vector<std::complex<double>>& signal) const;
-
+    apply(const std::vector<std::complex<double>>& signal) const override;
+	
+	[[nodiscard]]
+    std::string name() const override { return "AWGN"; }
+	
     /**
      * Retourne la puissance du bruit (sigma^2)
      */

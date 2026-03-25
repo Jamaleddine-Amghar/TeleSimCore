@@ -9,16 +9,16 @@
 namespace telecom {
 
 /**
- * Demodulateur BPSK (Binary Phase Shift Keying)
+ * Demodulateur QPSK (Quadrature Phase Shift Keying)
  *
  * Decision dure sur la partie reelle du symbole recu :
  *   real > 0  ->  bit 1
  *   real < 0  ->  bit 0
  *   real = 0  ->  indecidable (retourne std::nullopt)
  */
-class BpskDemodulator : public IDemodulator {
+class QpskDemodulator : public IDemodulator {
 public:
-    BpskDemodulator() = default;
+    QpskDemodulator() = default;
 
     /**
      * Demodule un vecteur de symboles complexes en bits
@@ -31,16 +31,16 @@ public:
     demodulate(const std::vector<std::complex<double>>& symbols) const override;
 
     /**
-     * Nombre de bits par symbole (toujours 1 pour BPSK)
+     * Nombre de bits par symbole (toujours 2 pour QPSK)
      */
     [[nodiscard]]
-    int bitsPerSymbol() const noexcept override { return 1; }
+    int bitsPerSymbol() const noexcept override { return 2; }
 
     /**
      * Nom du demodulateur
      */
     [[nodiscard]]
-    std::string name() const override { return "BPSK"; }
+    std::string name() const override { return "QPSK-DEMOD"; }
 };
 
 } // namespace telecom

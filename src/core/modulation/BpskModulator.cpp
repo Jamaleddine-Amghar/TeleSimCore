@@ -1,8 +1,8 @@
 #include "core/modulation/BpskModulator.hpp"
 
 namespace telecom {
-
-	std::vector<BpskModulator::Symbol>
+	using Symbol = std::complex<double>;
+	std::vector<Symbol>
 	BpskModulator::modulate(const std::vector<int>& bits) const
 	{
 		// Si l'entree est vide, retourner un vecteur vide
