@@ -30,9 +30,10 @@ public:
      * @return      Vecteur de symboles complexes
      * @throws std::invalid_argument si un bit n'est pas 0 ou 1
      */
+    // clang-format off
     [[nodiscard]]  // tell the compiler that the return value of a function should not be ignored.
     std::vector<std::complex<double>> modulate(const std::vector<int>& bits) const override;
-
+    // clang-format on
     /**
      * Nombre de bits par symbole (toujours 1 pour BPSK)
      */

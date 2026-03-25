@@ -44,11 +44,12 @@ int main() {
         // En-tete du tableau
         constexpr int W1 = 12;
         constexpr int W2 = 18;
+        // clang-format off
         std::cout << std::left << std::setw(W1) << "BNR (dB)" << std::setw(W2) << "BER theorique" << std::setw(W2) << "SER theorique" << std::setw(W1)
                   << "Bits errones"
                   << "\n";
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";
-
+        // clang-format on
         for (const double snr_db : snr_range) {
             // Construire le pipeline pour ce SNR
             TransmissionPipeline pipeline;
@@ -80,11 +81,12 @@ int main() {
         std::cout << "    TeleSimCore : Simulation BER QPSK + AWGN    \n";
         std::cout << "================================================\n\n";
 
+        // clang-format off
         std::cout << std::left << std::setw(W1) << "SNR (dB)" << std::setw(W2) << "BER theorique" << std::setw(W2) << "SER theorique" << std::setw(W1)
                   << "Bits errones"
                   << "\n";
         std::cout << std::string(W1 + 2 * W2 + W1, '-') << "\n";
-
+        // clang-format on
         for (const double snr_db : snr_range) {
             // Construire le pipeline pour ce SNR
             TransmissionPipeline pipeline;
