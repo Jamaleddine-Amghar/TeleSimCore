@@ -3,21 +3,23 @@ BasedOnStyle: Google
 IndentWidth: 4
 ColumnLimit: 150
 AccessModifierOffset: -4
+
+# Pour les & dans les fonctions (résout les .hpp)
 PointerAlignment: Left
 ReferenceAlignment: Pointer
 DerivePointerAlignment: false
-
-# Pour éviter l'erreur sur les templates >> et l'espace avant &
 SpacesInAngles: Never
 
-# Pour les lignes avec << "Bits errones"
-AlignAfterOpenBracket: DontAlign
-ContinuationIndentWidth: 4
-BreakBeforeBinaryOperators: None
+# Options anti-alignement pour les << (le cœur du problème)
+AlignAfterOpenBracket: false
 AlignOperands: DontAlign
+BreakBeforeBinaryOperators: None
+ContinuationIndentWidth: 4
 
-# Options de propreté
+# Force encore plus sur les streams <<
+PenaltyBreakFirstLessLess: 0
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+
 SpaceBeforeParens: ControlStatements
-
-# Standard sans risque d'erreur (Latest = le plus récent supporté)
 Standard: Latest
